@@ -1,4 +1,4 @@
-
+// CityArrayAdapter.java
 package com.example.listycitylab3;
 
 import android.content.Context;
@@ -17,22 +17,22 @@ public class CityArrayAdapter extends ArrayAdapter<City> {
     public CityArrayAdapter(Context context, ArrayList<City> cities) {
         super(context, 0, cities);
     }
+
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup
-            parent) {
-        View view;
-        if (convertView == null) {
-            view = LayoutInflater.from(getContext()).inflate(R.layout.content,
-                    parent, false);
-        } else {
-            view = convertView;
-        }
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        View view = (convertView == null)
+                ? LayoutInflater.from(getContext()).inflate(R.layout.content, parent, false)
+                : convertView;
+
         City city = getItem(position);
         TextView cityName = view.findViewById(R.id.city_text);
         TextView provinceName = view.findViewById(R.id.province_text);
-        cityName.setText(city.getName());
-        provinceName.setText(city.getProvince());
+
+        if (city != null) {
+            cityName.setText(city.getName());
+            provinceName.setText(city.getProvince());
+        }
         return view;
     }
 }
